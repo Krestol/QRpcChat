@@ -45,3 +45,34 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.sln
+Chat/Client/Client.vcxproj.filters
+*.vcxproj
+QRpc.pro.user
+Chat/Client/debug/moc_ChatHistory.cpp
+Chat/Client/debug/moc_MainWindow.cpp
+Chat/Client/debug/moc_SendMsgWidget.cpp
+Chat/Client/ui_MainWindow.h
+Chat/Server/debug/moc_MyServer.cpp
+Chat/Server/ui_ServerWidget.h
+QRpc/debug/moc_ClientEmulated.cpp
+*.filters
+QRpc/qrpc.h
+Chat/Client/debug/moc_ConnectionWidget.cpp
+Chat/Client/ui_ConnectionWidget.h
+Chat/Server/debug/moc_MainWindow.cpp
+Chat/Client/ui_WaitingWidget.h
+Chat/Server/ui_MainWindow.h
+Chat/Client/debug/moc_RegistrationWidget.cpp
+Chat/Server/debug/moc_ServerWidget.cpp
+QRpc.sdf
+Chat/Client/debug/moc_WaitingWidget.cpp
+Chat/Client/ui_RegistrationWidget.h
+Chat/Client/ui_SendMsgWidget.h
+Chat/Client/ui_ChatHistory.h
+Chat/Client/debug/moc_MyClient.cpp
+Chat/Client/debug/moc_MyClient.cpp
+QRpc.v12.suo
+QRpc/debug/moc_Client.cpp
+QRpc.opensdf
+QRpc/qrpc.h
