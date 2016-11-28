@@ -3,4 +3,4 @@
 #include <QMessageBox>
 #include <QtCore>
 #include <QMap>
-
+#include <assert.h>

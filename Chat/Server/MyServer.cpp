@@ -7,7 +7,7 @@ MyServer::MyServer(QObject* parent)
     : QObject(parent)
     , m_lastId(0)
 {
-    m_clientEmulated = GetClientEmulated(2323, this);
+    SetClientEmulated(2323, this);
 }
 
 void MyServer::OnNewMsg(int id, const QTime& time, const QString& msg)

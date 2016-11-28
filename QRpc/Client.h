@@ -1,20 +1,22 @@
 #pragma once
 #include <QObject>
-class ServerEmulated;
 
 namespace qRpc
 {
+    class ServerEmulated;
     class Client : public QObject
     {
         Q_OBJECT
 
     public:
         explicit Client(QObject* parent);
+        virtual ~Client(){}
 
     signals:
         void Connected();
 
     protected:
+        ServerEmulated* GetServerEmulated(int port, const QString& host, Client* realClient, QObject* parent);
         QMetaObject::Connection connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type);
 
         QMetaObject::Connection connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type);

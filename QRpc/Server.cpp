@@ -7,8 +7,7 @@ qRpc::Server::Server()
 {
 }
 
-qRpc::ClientEmulated* qRpc::Server::GetClientEmulated(int port, QObject* realServer)
+void qRpc::Server::SetClientEmulated(int port, QObject* realServer)
 {
     m_clientEmulated = new qRpc::ClientEmulated(port, realServer, realServer);
-    return m_clientEmulated;
 }

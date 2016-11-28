@@ -35,29 +35,14 @@ namespace qRpc
             outStream << quint16(0);
             outStream << slot;
 
-
             for (auto& arg : argv)
             {
                 outStream << arg;
             }
 
-           // QVariant id(int(7));
-            //outStream << id;
-
             outStream.device()->seek(0);
-            quint16 size = arrBlock.size() - sizeof(quint16);
             outStream << quint16(arrBlock.size() - sizeof(quint16));
             outStream.device()->seek(0);
-
-         /*   quint16 _size;
-            QString _slot;
-            QString _slot_2;
-            QVariant _id;
-            outStream >> _size;
-            outStream >> _slot;
-            outStream >> _slot_2;
-            outStream >> _id;
-*/
             socket->write(arrBlock);
         }
     }

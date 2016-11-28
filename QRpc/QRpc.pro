@@ -13,20 +13,21 @@ TARGET = QRpc
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += qrpc.cpp \
+SOURCES += \
     ServerEmulated.cpp \
     ClientEmulated.cpp \
     Client.cpp \
     Utils.cpp \
     Server.cpp
 
-HEADERS += qrpc.h \
+HEADERS += \
     ServerEmulated.h \
     ClientEmulated.h \
     Client.h \
     stdafx.h \
     Utils.h \
     Server.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target

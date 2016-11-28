@@ -146,7 +146,8 @@ void qRpc::utils::ExecuteSlotBySignature(const QString& signature, QDataStream& 
     std::vector<QString> args;
     ParseArgs(signature.toStdString().data(), args);
 
-    for (auto& arg : args)
+    const int numberOfParams = args.size();
+    for (int i = 0; i < numberOfParams; ++i)
     {
         QVariant type;
         inStream >> type;

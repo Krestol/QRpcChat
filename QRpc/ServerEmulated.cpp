@@ -37,8 +37,7 @@ void qRpc::ServerEmulated::CallRealServer(void** argv)
     outStream.setVersion(QDataStream::Qt_5_7);
 
     QMetaMethod metaMethod = sender()->metaObject()->method(senderSignalIndex());
-   // const QString className = sender()->metaObject()->className();
-    QString normalizedSignal(/*className + "::" + */QMetaObject::normalizedSignature(metaMethod.methodSignature()));
+    QString normalizedSignal(QMetaObject::normalizedSignature(metaMethod.methodSignature()));
 
     QStringList slotsToCall(m_serverSlots.values(normalizedSignal));
     if (!slotsToCall.empty())
@@ -69,8 +68,6 @@ int qRpc::ServerEmulated::qt_metacall(QMetaObject::Call /*call*/, int id, void**
 
 void qRpc::ServerEmulated::OnResponse()
 {
-    //QTcpSocket* clientSocket = dynamic_cast<QTcpSocket*>(sender());
-
     QDataStream inStream(m_tcpSocket);
     inStream.setVersion(QDataStream::Qt_5_7);
 

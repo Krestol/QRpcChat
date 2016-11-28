@@ -8,6 +8,11 @@ qRpc::Client::Client(QObject* parent)
 {
 }
 
+qRpc::ServerEmulated* qRpc::Client::GetServerEmulated(int port, const QString& host, Client* realClient, QObject* parent)
+{
+    return new qRpc::ServerEmulated(port, host, realClient, parent);
+}
+
 QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type)
 {
     ServerEmulated* serverReceiver = dynamic_cast<ServerEmulated*>(receiver);
@@ -36,6 +41,7 @@ QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signa
     else if (serverSender == nullptr && serverReceiver == nullptr)
     {
         //todo connect server signal to server slot
+        return QMetaObject::Connection();
     }
     else
     {
@@ -45,7 +51,7 @@ QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signa
 
 QMetaObject::Connection qRpc::Client::connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type)
 {
-    return connect(sender, signal, method, type);
+    return QObject::connect(sender, signal, method, type);
 }
 
 QMetaObject::Connection qRpc::Client::connect(const QObject *sender, const QMetaMethod &signal,
