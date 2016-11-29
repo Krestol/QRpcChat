@@ -58,7 +58,8 @@ void qRpc::ClientEmulated::OnReadClient()
     QDataStream inStream(m_currentOpenClientSocket);
     inStream.setVersion(QDataStream::Qt_5_7);
 
-    for (;;)
+    bool allDataReceived = false;
+    while (!allDataReceived)
     {
         if (!m_nNextBlockSize)
         {
@@ -69,13 +70,13 @@ void qRpc::ClientEmulated::OnReadClient()
             inStream >> m_nNextBlockSize;
         }
 
-        if (m_currentOpenClientSocket->bytesAvailable() < m_nNextBlockSize)
+        int size = m_currentOpenClientSocket->bytesAvailable();
+        if (size == m_nNextBlockSize)
         {
-            break;
+            m_nNextBlockSize = 0;
+            allDataReceived = true;
         }
-
-        ExecuteSlot(inStream);
-
-        m_nNextBlockSize = 0;
     }
+
+    ExecuteSlot(inStream);
 }

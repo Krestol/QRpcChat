@@ -18,7 +18,8 @@ SOURCES += \
     ClientEmulated.cpp \
     Client.cpp \
     Utils.cpp \
-    Server.cpp
+    Server.cpp \
+    SerializeUtils.cpp
 
 HEADERS += \
     ServerEmulated.h \
@@ -26,7 +27,8 @@ HEADERS += \
     Client.h \
     stdafx.h \
     Utils.h \
-    Server.h
+    Server.h \
+    SerializeUtils.h
 
 unix {
     target.path = /usr/lib

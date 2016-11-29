@@ -41,52 +41,7 @@ namespace
 }
 
 void qRpc::utils::WriteToStreamLikeQVariant(const char* type, int indx, void** argv, QDataStream& out)
-{
-   /* QString*/ QVariant str;
-    /*int*/ QVariant i;
-    /*QTime*/ QVariant time;
-   /*
-    switch(QMetaType::type(type))
-    {
-    case QMetaType::Bool:
-        out << *reinterpret_cast<bool(*)>(argv[indx]);
-        break;
-
-    case QMetaType::Int:
-        i = *reinterpret_cast<int(*)>(argv[indx]);
-        out << i;
-        break;
-
-    case QMetaType::UInt:
-        out << *reinterpret_cast<unsigned int(*)>(argv[indx]);
-        break;
-
-    case QMetaType::Double:
-        out << *reinterpret_cast<double(*)>(argv[indx]);
-        break;
-
-    case QMetaType::QChar:
-        out << *reinterpret_cast<QChar(*)>(argv[indx]);
-        break;
-
-    case QMetaType::QString:
-        str = *reinterpret_cast<QString(*)>(argv[indx]);
-        out << str;
-        break;
-
-    case QMetaType::QByteArray:
-        out << *reinterpret_cast<QByteArray(*)>(argv[indx]);
-        break;
-
-    case QMetaType::QTime:
-        time = *reinterpret_cast<QTime(*)>(argv[indx]);
-        out << time;
-        break;
-
-    default:
-        break;
-    }
-    */
+{   
     switch(QMetaType::type(type))
     {
     case QMetaType::Bool:
@@ -94,18 +49,15 @@ void qRpc::utils::WriteToStreamLikeQVariant(const char* type, int indx, void** a
         break;
 
     case QMetaType::Int:
-        i = QVariant(*reinterpret_cast<int(*)>(argv[indx]));
-        out << i;
+		out << QVariant(*reinterpret_cast<int(*)>(argv[indx]));
         break;
 
     case QMetaType::QString:
-        str = QVariant(*reinterpret_cast<QString(*)>(argv[indx]));
-        out << str;
+		out << QVariant(*reinterpret_cast<QString(*)>(argv[indx]));
         break;
 
     case QMetaType::QTime:
-        time = QVariant(*reinterpret_cast<QTime(*)>(argv[indx]));
-        out << time;
+		out << QVariant(*reinterpret_cast<QTime(*)>(argv[indx]));
         break;
 
     default:

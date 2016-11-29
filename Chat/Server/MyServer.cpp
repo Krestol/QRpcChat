@@ -2,6 +2,7 @@
 #include "MyServer.h"
 #include "ClientEmulated.h"
 #include "Message.h"
+#include "SerializeUtils.h"
 
 MyServer::MyServer(QObject* parent)
     : QObject(parent)
@@ -37,16 +38,6 @@ void MyServer::OnRegistration(const QString& name)
 void MyServer::OnUpdate()
 {
     QByteArray history;
-    QDataStream outStream(&history, QIODevice::WriteOnly);
-    outStream.setVersion(QDataStream::Qt_5_7);
-
-    const int size = m_messages.size();
-    outStream << size;
-
-    for (int i = 0; i < size; ++i)
-    {
-        Message msg(m_messages.at(i));
-        outStream << msg;
-    }
+    qRpc::SerializeContainer(m_messages, history);
     EmitUniversalSignal(history);
 }

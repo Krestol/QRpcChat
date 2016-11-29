@@ -7,7 +7,7 @@ public:
     Message();
     Message(const QString& sender, const QTime& time, const QString& msg);
 
-    friend QDataStream& operator << (QDataStream& stream, Message& message);
+    friend QDataStream& operator << (QDataStream& stream, const Message& message);
     friend QDataStream& operator >> (QDataStream& stream, Message& message);
 
     QString senderName;
@@ -16,5 +16,5 @@ public:
 
 };
 
-QDataStream& operator << (QDataStream& stream, Message& message);
+QDataStream& operator << (QDataStream& stream, const Message& message);
 QDataStream& operator >> (QDataStream& stream, Message& message);

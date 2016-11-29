@@ -2,6 +2,7 @@
 #include "MyClient.h"
 #include "ServerEmulated.h"
 #include "Message.h"
+#include "SerializeUtils.h"
 
 MyClient::MyClient(QObject* parent)
     : Client(parent) //
@@ -38,20 +39,10 @@ void MyClient::OnRegistrationResponse(int id, const QString& name)
     }
 }
 
-void MyClient::OnReceivedMsgHistory(QByteArray history) //CustomContainer<Message> msgs
+void MyClient::OnReceivedMsgHistory(QByteArray history)
 {
-    QDataStream inStream(&history, QIODevice::ReadOnly);
-    inStream.setVersion(QDataStream::Qt_5_7);
-
-    int size;
-    inStream >> size;
     m_history.clear();
-    for (int i = 0; i < size; ++i)
-    {
-        Message msg;
-        inStream >> msg;
-        m_history.push_back(msg);
-    }
+    qRpc::DesrializeContainer<Message>(m_history, history);
     UpdateHistory(m_history);
 }
 

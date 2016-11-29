@@ -11,7 +11,7 @@ Message::Message(const QString& sender, const QTime& time, const QString& msg)
 {}
 
 
-QDataStream& operator << (QDataStream& stream, Message& message)
+QDataStream& operator << (QDataStream& stream, const Message& message)
 {
     stream << message.senderName << message.sendTime << message.text;
     return stream;
