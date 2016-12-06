@@ -1,5 +1,5 @@
 #pragma once
-#include "Server.h"
+#include "ServerBase.h"
 #include <QObject>
 #include <QMap>
 #include <QTime>
@@ -10,7 +10,7 @@ namespace qRpc
 }
 
 class Message;
-class MyServer : public QObject, private qRpc::Server
+class MyServer : public QObject, private qRpc::ServerBase
 {
     Q_OBJECT
 

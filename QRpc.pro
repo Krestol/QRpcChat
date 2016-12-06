@@ -7,5 +7,6 @@ SUBDIRS += \
 
 QRpc.file = QRpc/QRpc.pro
 Chat.file = Chat/Chat.pro
+ChatCommon.file = ChatCommon/ChatCommon.pro
 
-Chat.depends = QRpc
+Chat.depends = QRpc ChatCommon

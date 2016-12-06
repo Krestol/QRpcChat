@@ -5,7 +5,7 @@
 #include "SerializeUtils.h"
 
 MyClient::MyClient(QObject* parent)
-    : Client(parent) //
+    : ClientBase(parent) //
     , m_remoteServer(nullptr)
 {
 }

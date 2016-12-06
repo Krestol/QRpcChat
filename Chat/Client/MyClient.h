@@ -1,5 +1,5 @@
 #pragma once
-#include "Client.h"
+#include "ClientBase.h"
 #include <QMap>
 
 namespace qRpc
@@ -8,7 +8,7 @@ namespace qRpc
 }
 
 class Message;
-class MyClient : public qRpc::Client
+class MyClient : public qRpc::ClientBase
 {
     Q_OBJECT
 
