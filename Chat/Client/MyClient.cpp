@@ -6,18 +6,18 @@
 
 MyClient::MyClient(QObject* parent)
     : Client(parent) //
-    , m_serverEmulated(nullptr)
+    , m_remoteServer(nullptr)
 {
 }
 
 void MyClient::ConnectToServer(const QString& host, int port)
 {
-    m_serverEmulated = GetServerEmulated(port, host, this, this);
-    connect(this, SIGNAL(SendToServer(int, const QTime&, const QString&)), m_serverEmulated, SLOT(OnNewMsg(int, const QTime&, const QString&)), Qt::AutoConnection);
-    connect(this, SIGNAL(Registrate(const QString&)), m_serverEmulated, SLOT(OnRegistration(const QString&)), Qt::AutoConnection);
-    connect(m_serverEmulated, SIGNAL(OnRegistration_signal(QString)), this, SLOT(OnRegistrationResponse(int, const QString&)), Qt::AutoConnection);
-    connect(this, SIGNAL(Update()), m_serverEmulated, SLOT(OnUpdate()), Qt::AutoConnection);
-    connect(m_serverEmulated, SIGNAL(OnUpdate_signal()), this, SLOT(OnReceivedMsgHistory(QByteArray)), Qt::AutoConnection);
+    m_remoteServer = GetRemoteServer(port, host, this);
+    connect(this, SIGNAL(SendToServer(int, const QTime&, const QString&)), m_remoteServer, SLOT(OnNewMsg(int, const QTime&, const QString&)), Qt::AutoConnection);
+    connect(this, SIGNAL(Registrate(const QString&)), m_remoteServer, SLOT(OnRegistration(const QString&)), Qt::AutoConnection);
+    connect(m_remoteServer, SIGNAL(OnRegistration_signal(QString)), this, SLOT(OnRegistrationResponse(int, const QString&)), Qt::AutoConnection);
+    connect(this, SIGNAL(Update()), m_remoteServer, SLOT(OnUpdate()), Qt::AutoConnection);
+    connect(m_remoteServer, SIGNAL(OnUpdate_signal()), this, SLOT(OnReceivedMsgHistory(QByteArray)), Qt::AutoConnection);
 }
 
 void MyClient::OnSendMsg(const QString& msg)

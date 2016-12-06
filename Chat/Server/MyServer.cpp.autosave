@@ -8,7 +8,7 @@ MyServer::MyServer(QObject* parent)
     : QObject(parent)
     , m_lastId(0)
 {
-    ListenRemoteClient(2323, this);
+    Listen(2323, this);
 }
 
 void MyServer::OnNewMsg(int id, const QTime& time, const QString& msg)

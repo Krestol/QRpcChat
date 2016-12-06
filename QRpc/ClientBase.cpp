@@ -8,9 +8,9 @@ qRpc::Client::Client(QObject* parent)
 {
 }
 
-qRpc::ServerEmulated* qRpc::Client::GetServerEmulated(int port, const QString& host, Client* realClient, QObject* parent)
+qRpc::ServerEmulated* qRpc::Client::GetRemoteServer(int port, const QString& host, QObject* parent)
 {
-    return new qRpc::ServerEmulated(port, host, realClient, parent);
+    return new qRpc::ServerEmulated(port, host, this, parent);
 }
 
 QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type)

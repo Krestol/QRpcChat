@@ -11,13 +11,13 @@ namespace qRpc
         virtual ~Server(){}
 
     protected:
-        void SetClientEmulated(int port, QObject* realServer);
+        void ListenRemoteClient(int port, QObject* realServer);
         template<typename... Targs>
         void EmitUniversalSignal(Targs... args)
         {
-            if (m_clientEmulated != nullptr)
+            if (m_remoteClient != nullptr)
             {
-                m_clientEmulated->EmitToRealClient(args...);
+                m_remoteClient->EmitToRealClient(args...);
             }
             else
             {
@@ -26,7 +26,7 @@ namespace qRpc
         }
 
     private:
-        ClientEmulated* m_clientEmulated;
+        ClientEmulated* m_remoteClient;
     };
 }
 

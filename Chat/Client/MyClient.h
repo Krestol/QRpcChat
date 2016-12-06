@@ -34,7 +34,7 @@ private slots:
     void OnReceivedMsgHistory(QByteArray history);
 
 private:
-    qRpc::ServerEmulated* m_serverEmulated;
+    qRpc::ServerEmulated* m_remoteServer;
     int m_id;
     std::vector<Message> m_history;
 };

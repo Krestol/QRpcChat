@@ -26,7 +26,7 @@ signals:
     void NewMsg(const QString& name, const QTime& time, const QString& msg);
 
 private:
-    qRpc::ClientEmulated* m_clientEmulated;
+    qRpc::ClientEmulated* m_remoteClient;
     QMap<int, QString> m_users;
     QMap<QString, int> m_registrationMap;
     int m_lastId;

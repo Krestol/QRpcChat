@@ -16,7 +16,7 @@ namespace qRpc
         void Connected();
 
     protected:
-        ServerEmulated* GetServerEmulated(int port, const QString& host, Client* realClient, QObject* parent);
+        ServerEmulated* GetRemoteServer(int port, const QString& host, QObject* parent);
         QMetaObject::Connection connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type);
 
         QMetaObject::Connection connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type);
