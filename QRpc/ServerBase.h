@@ -4,14 +4,14 @@
 class QObject;
 namespace qRpc
 {
-    class Server
+    class ServerBase
     {
     public:
-        Server();
-        virtual ~Server(){}
+        ServerBase();
+        virtual ~ServerBase(){}
 
     protected:
-        void ListenRemoteClient(int port, QObject* realServer);
+        void Listen(int port, QObject* realServer);
         template<typename... Targs>
         void EmitUniversalSignal(Targs... args)
         {

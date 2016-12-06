@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "Client.h"
+#include "Clientbase.h"
 #include "ServerEmulated.h"
 #include "Utils.h"
 
-qRpc::Client::Client(QObject* parent)
+qRpc::ClientBase::ClientBase(QObject* parent)
     :QObject(parent)
 {
 }
 
-qRpc::ServerEmulated* qRpc::Client::GetRemoteServer(int port, const QString& host, QObject* parent)
+qRpc::ServerEmulated* qRpc::ClientBase::GetRemoteServer(int port, const QString& host, QObject* parent)
 {
     return new qRpc::ServerEmulated(port, host, this, parent);
 }
 
-QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type)
+QMetaObject::Connection qRpc::ClientBase::connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type)
 {
     ServerEmulated* serverReceiver = dynamic_cast<ServerEmulated*>(receiver);
     ServerEmulated* serverSender = dynamic_cast<ServerEmulated*>(sender);
@@ -49,12 +49,12 @@ QMetaObject::Connection qRpc::Client::connect(QObject* sender, const char* signa
     }
 }
 
-QMetaObject::Connection qRpc::Client::connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type)
+QMetaObject::Connection qRpc::ClientBase::connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type)
 {
     return QObject::connect(sender, signal, method, type);
 }
 
-QMetaObject::Connection qRpc::Client::connect(const QObject *sender, const QMetaMethod &signal,
+QMetaObject::Connection qRpc::ClientBase::connect(const QObject *sender, const QMetaMethod &signal,
                     const QObject *receiver, const QMetaMethod &method,
                     Qt::ConnectionType type/* = Qt::AutoConnection*/)
 {

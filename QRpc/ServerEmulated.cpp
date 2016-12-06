@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "ServerEmulated.h"
 #include "Utils.h"
-#include "Client.h"
+#include "ClientBase.h"
 
-qRpc::ServerEmulated::ServerEmulated(int port, const QString& host, Client* client, QObject* parent)
+qRpc::ServerEmulated::ServerEmulated(int port, const QString& host, ClientBase* client, QObject* parent)
     : QObject(parent)
     , m_port(port)
     , m_nNextBlockSize(0)

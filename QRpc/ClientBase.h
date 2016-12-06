@@ -4,13 +4,13 @@
 namespace qRpc
 {
     class ServerEmulated;
-    class Client : public QObject
+    class ClientBase : public QObject
     {
         Q_OBJECT
 
     public:
-        explicit Client(QObject* parent);
-        virtual ~Client(){}
+        explicit ClientBase(QObject* parent);
+        virtual ~ClientBase(){}
 
     signals:
         void Connected();
@@ -20,7 +20,7 @@ namespace qRpc
         QMetaObject::Connection connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type);
 
         QMetaObject::Connection connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type);
-        QMetaObject::Connection qRpc::Client::connect(const QObject *sender, const QMetaMethod &signal,
+        QMetaObject::Connection qRpc::ClientBase::connect(const QObject *sender, const QMetaMethod &signal,
                             const QObject *receiver, const QMetaMethod &method,
                             Qt::ConnectionType type = Qt::AutoConnection);
 

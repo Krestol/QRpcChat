@@ -19,11 +19,11 @@ namespace qRpc
         const QString slotSignature;
     };
 
-    class Client;
+    class ClientBase;
     class ServerEmulated : public QObject
     {
     public:
-        ServerEmulated(int port, const QString& host, Client* client, QObject* parent);
+        ServerEmulated(int port, const QString& host, ClientBase* client, QObject* parent);
         int qt_metacall(QMetaObject::Call call, int id, void** argv);
         void AddConnection(const QString& signal, const QString& slot);
         void AddConnection(const QString& signal, const QString& slot, QObject* receiver);
@@ -42,7 +42,7 @@ namespace qRpc
         QMap<QString, QString> m_serverSlots;
         QMap<QString, SlotToCall> m_clientSlots;
         QTcpSocket* m_tcpSocket;
-        Client* m_client;
+        ClientBase* m_client;
         quint16 m_nNextBlockSize;
 
     };

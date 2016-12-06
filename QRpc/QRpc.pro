@@ -16,18 +16,18 @@ CONFIG += staticlib
 SOURCES += \
     ServerEmulated.cpp \
     ClientEmulated.cpp \
-    Client.cpp \
+    ClientBase.cpp \
     Utils.cpp \
-    Server.cpp \
+    ServerBase.cpp \
     SerializeUtils.cpp
 
 HEADERS += \
     ServerEmulated.h \
     ClientEmulated.h \
-    Client.h \
+    ClientBase.h \
     stdafx.h \
     Utils.h \
-    Server.h \
+    ServerBase.h \
     SerializeUtils.h
 
 unix {
