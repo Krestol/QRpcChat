@@ -41,7 +41,7 @@ namespace
 }
 
 void qRpc::utils::WriteToStreamLikeQVariant(const char* type, int indx, void** argv, QDataStream& out)
-{   
+{
     switch(QMetaType::type(type))
     {
     case QMetaType::Bool:
@@ -49,15 +49,19 @@ void qRpc::utils::WriteToStreamLikeQVariant(const char* type, int indx, void** a
         break;
 
     case QMetaType::Int:
-		out << QVariant(*reinterpret_cast<int(*)>(argv[indx]));
+        out << QVariant(*reinterpret_cast<int(*)>(argv[indx]));
         break;
 
     case QMetaType::QString:
-		out << QVariant(*reinterpret_cast<QString(*)>(argv[indx]));
+        out << QVariant(*reinterpret_cast<QString(*)>(argv[indx]));
         break;
 
     case QMetaType::QTime:
-		out << QVariant(*reinterpret_cast<QTime(*)>(argv[indx]));
+        out << QVariant(*reinterpret_cast<QTime(*)>(argv[indx]));
+        break;
+
+    case QMetaType::QBitArray:
+        out << QVariant(*reinterpret_cast<QByteArray(*)>(argv[indx]));
         break;
 
     default:

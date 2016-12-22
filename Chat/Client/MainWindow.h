@@ -1,5 +1,4 @@
 #pragma once
-#include <QMainWindow>
 
 namespace Ui
 {
@@ -38,7 +37,7 @@ private slots:
     void OnRegistrationFailed();
 
 private:
-    Ui::MainWindow *ui;
+    std::unique_ptr<Ui::MainWindow> m_ui;
     ConnectionWidget* m_connectionWidget;
     MyClient* m_client;
     WaitingWidget* m_waitingWidget;

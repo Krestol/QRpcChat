@@ -5,7 +5,7 @@
 #include "SerializeUtils.h"
 
 MyClient::MyClient(QObject* parent)
-    : ClientBase(parent) //
+    : ClientBase(parent)
     , m_remoteServer(nullptr)
 {
 }
@@ -13,17 +13,18 @@ MyClient::MyClient(QObject* parent)
 void MyClient::ConnectToServer(const QString& host, int port)
 {
     m_remoteServer = GetRemoteServer(port, host, this);
-    connect(this, SIGNAL(SendToServer(int, const QTime&, const QString&)), m_remoteServer, SLOT(OnNewMsg(int, const QTime&, const QString&)), Qt::AutoConnection);
-    connect(this, SIGNAL(Registrate(const QString&)), m_remoteServer, SLOT(OnRegistration(const QString&)), Qt::AutoConnection);
-    connect(m_remoteServer, SIGNAL(OnRegistration_signal(QString)), this, SLOT(OnRegistrationResponse(int, const QString&)), Qt::AutoConnection);
-    connect(this, SIGNAL(Update()), m_remoteServer, SLOT(OnUpdate()), Qt::AutoConnection);
-    connect(m_remoteServer, SIGNAL(OnUpdate_signal()), this, SLOT(OnReceivedMsgHistory(QByteArray)), Qt::AutoConnection);
+    connect(this, SIGNAL(NewMessage(int, const QTime&, const QString&)), m_remoteServer, SLOT(OnNewMsg(int, const QTime&, const QString&)));
+    connect(this, SIGNAL(Registrate(const QString&)), m_remoteServer, SLOT(OnRegistration(const QString&)));
+    connect(m_remoteServer, SIGNAL(OnRegistration_response(QString)), this, SLOT(OnRegistrationResponse(int, const QString&)));
+    connect(this, SIGNAL(Update()), m_remoteServer, SLOT(OnUpdate()));
+    connect(m_remoteServer, SIGNAL(OnUpdate_response()), this, SLOT(OnReceivedMsgHistory(QByteArray)));
 }
+
 
 void MyClient::OnSendMsg(const QString& msg)
 {
     QTime time(QTime::currentTime());
-    emit SendToServer(m_id, time, msg);
+    emit NewMessage(m_id, time, msg);
 }
 
 void MyClient::OnRegistrationResponse(int id, const QString& name)

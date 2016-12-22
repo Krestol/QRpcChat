@@ -1,7 +1,4 @@
-#ifndef CHATHISTORY_H
-#define CHATHISTORY_H
-
-#include <QWidget>
+#pragma once
 
 namespace Ui {
     class ChatHistory;
@@ -20,7 +17,6 @@ public slots:
     void SetHistory(const std::vector<Message>& history);
 
 private:
-    Ui::ChatHistory *ui;
+    std::unique_ptr<Ui::ChatHistory> m_ui;
 };
 
-#endif // CHATHISTORY_H

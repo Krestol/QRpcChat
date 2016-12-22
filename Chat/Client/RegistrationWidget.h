@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QWidget>
-
 namespace Ui {
     class RegistrationWidget;
 }
@@ -24,6 +22,9 @@ private slots:
     void OnRegistration();
 
 private:
-    Ui::RegistrationWidget *ui;
+    void keyPressEvent(QKeyEvent* event);
+
+private:
+    std::unique_ptr<Ui::RegistrationWidget> m_ui;
 };
 

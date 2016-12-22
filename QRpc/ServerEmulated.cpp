@@ -12,7 +12,7 @@ qRpc::ServerEmulated::ServerEmulated(int port, const QString& host, ClientBase* 
     m_tcpSocket = new QTcpSocket(this);
     m_tcpSocket->connectToHost(host, port);
     connect(m_tcpSocket, &QTcpSocket::readyRead, this, &ServerEmulated::OnResponse);
-    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &ServerEmulated::OnConnected);
+    connect(m_tcpSocket, &QTcpSocket::connected, m_client, &ClientBase::Connected);
 }
 
 void qRpc::ServerEmulated::AddConnection(const QString& signal, const QString& slot)
@@ -99,7 +99,7 @@ void qRpc::ServerEmulated::EmitUnivesalSignal(QDataStream& data)
 {
     QString serverSignal;
     data >> serverSignal;
-    serverSignal.insert(serverSignal.indexOf('('), "_signal");
+    serverSignal.insert(serverSignal.indexOf('('), "_response");
 
     QList<SlotToCall> slotsToCall = m_clientSlots.values(serverSignal);
 
@@ -108,10 +108,4 @@ void qRpc::ServerEmulated::EmitUnivesalSignal(QDataStream& data)
         std::vector<QVariant> argv;
         utils::ExecuteSlotBySignature(slot.slotSignature, data, argv, slot.object);
     }
-}
-
-void qRpc::ServerEmulated::OnConnected()
-{
-    m_client->Connected();
-    disconnect(m_tcpSocket, &QTcpSocket::readyRead, this, &ServerEmulated::OnConnected);
 }

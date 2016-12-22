@@ -16,6 +16,8 @@ LIBS += -L$$LIBDIR
 
 LIBS += -lqrpc -lChatCommon
 
+PRECOMPILED_HEADER = stable.h
+
 INCLUDEPATH += \
             . \
             .. \

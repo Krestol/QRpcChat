@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QWidget>
-
 namespace Ui {
     class WaitingWidget;
 }
@@ -20,5 +18,5 @@ signals:
     void ChangeServer();
 
 private:
-    Ui::WaitingWidget *ui;
+    std::unique_ptr<Ui::WaitingWidget> m_ui;
 };

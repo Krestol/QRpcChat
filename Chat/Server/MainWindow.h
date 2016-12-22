@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QMainWindow>
-
 namespace Ui {
     class MainWindow;
 }
@@ -17,7 +15,7 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    std::unique_ptr<Ui::MainWindow> m_ui;
     ServerWidget* m_serverWidget;
     MyServer* m_myServer;
 };

@@ -1,8 +1,5 @@
 #pragma once
 #include "ServerBase.h"
-#include <QObject>
-#include <QMap>
-#include <QTime>
 
 namespace qRpc
 {
@@ -31,4 +28,5 @@ private:
     QMap<QString, int> m_registrationMap;
     int m_lastId;
     QList<Message> m_messages;
+    qRpc::ClientEmulated* m_client;
 };

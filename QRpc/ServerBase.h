@@ -1,9 +1,9 @@
 #pragma once
-#include "ClientEmulated.h"
 
 class QObject;
 namespace qRpc
 {
+    class ClientEmulated;
     class ServerBase
     {
     public:
@@ -11,22 +11,19 @@ namespace qRpc
         virtual ~ServerBase(){}
 
     protected:
-        void Listen(int port, QObject* realServer);
+        ClientEmulated* Listen(int port, QObject* realServer);
         template<typename... Targs>
-        void EmitUniversalSignal(Targs... args)
+        void EmitResponseSignal(ClientEmulated* client, Targs... args)
         {
-            if (m_remoteClient != nullptr)
+            if (client != nullptr)
             {
-                m_remoteClient->EmitToRealClient(args...);
+                client->EmitToRealClient(args...);
             }
             else
             {
-                assert(!"Real server must to call SetClientEmulated before EmitUniversalSignal");
+                assert(!"Real server must to call Listen before EmitUniversalSignal");
             }
         }
-
-    private:
-        ClientEmulated* m_remoteClient;
     };
 }
 

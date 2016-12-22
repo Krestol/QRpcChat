@@ -32,18 +32,22 @@ namespace
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , m_ui(new Ui::MainWindow)
     , m_serverWidget(nullptr)
     , m_myServer(nullptr)
 {
-    ui->setupUi(this);
+    m_ui->setupUi(this);
     m_serverWidget = new ServerWidget(this);
     m_myServer = new MyServer(this);
+
+    setWindowTitle("Server");
+
+    m_ui->historyLayout->addWidget(m_serverWidget);
 
     QString ip(GetIp());
     if(!ip.isEmpty())
     {
-        ui->label->setText(QString("server ip: %0").arg(ip));
+        m_ui->label->setText(QString("server ip: %0").arg(ip));
     }
     else
     {
@@ -55,5 +59,4 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }

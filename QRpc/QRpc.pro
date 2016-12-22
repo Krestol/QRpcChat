@@ -13,6 +13,8 @@ TARGET = QRpc
 TEMPLATE = lib
 CONFIG += staticlib
 
+PRECOMPILED_HEADER = stable.h
+
 SOURCES += \
     ServerEmulated.cpp \
     ClientEmulated.cpp \

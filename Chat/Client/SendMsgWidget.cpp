@@ -4,19 +4,26 @@
 
 SendMsgWidget::SendMsgWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SendMsgWidget)
+    m_ui(new Ui::SendMsgWidget)
 {
-    ui->setupUi(this);
-    connect(ui->pushButton, &QPushButton::clicked, this, &SendMsgWidget::OnSendMsg);
+    m_ui->setupUi(this);
+    connect(m_ui->pushButton, &QPushButton::clicked, this, &SendMsgWidget::OnSendMsg);
 }
 
 SendMsgWidget::~SendMsgWidget()
 {
-    delete ui;
 }
 
 void SendMsgWidget::OnSendMsg()
 {
-    emit SendMsg(ui->lineEdit->text());
-    ui->lineEdit->clear();
+    emit SendMsg(m_ui->lineEdit->text());
+    m_ui->lineEdit->clear();
+}
+
+void SendMsgWidget::keyPressEvent(QKeyEvent* event)
+{
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        OnSendMsg();
+    }
 }

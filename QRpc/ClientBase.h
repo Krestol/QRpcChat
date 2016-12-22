@@ -1,5 +1,4 @@
 #pragma once
-#include <QObject>
 
 namespace qRpc
 {
@@ -17,10 +16,10 @@ namespace qRpc
 
     protected:
         ServerEmulated* GetRemoteServer(int port, const QString& host, QObject* parent);
-        QMetaObject::Connection connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type);
+        QMetaObject::Connection connect(QObject* sender, const char* signal, QObject* receiver, const char* method, Qt::ConnectionType type = Qt::AutoConnection);
 
         QMetaObject::Connection connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type);
-        QMetaObject::Connection qRpc::ClientBase::connect(const QObject *sender, const QMetaMethod &signal,
+        QMetaObject::Connection connect(const QObject *sender, const QMetaMethod &signal,
                             const QObject *receiver, const QMetaMethod &method,
                             Qt::ConnectionType type = Qt::AutoConnection);
 

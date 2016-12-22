@@ -10,7 +10,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , m_ui(new Ui::MainWindow)
     , m_connectionWidget(nullptr)
     , m_client(nullptr)
     , m_waitingWidget(nullptr)
@@ -19,8 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     , m_historyWidget(nullptr)
     , m_timer(nullptr)
 {
-    ui->setupUi(this);
-    ui->lblId->hide();
+    m_ui->setupUi(this);
+    m_ui->lblId->hide();
+
+    setWindowTitle("Client");
 
     m_client = new MyClient(this);
 
@@ -33,16 +35,16 @@ MainWindow::MainWindow(QWidget *parent)
     m_timer->setInterval(1000);
     m_timer->start();
 
-    ui->stackedWidget->addWidget(m_connectionWidget);
-    ui->stackedWidget->addWidget(m_waitingWidget);
-    ui->stackedWidget->addWidget(m_registrationWidget);
+    m_ui->stackedWidget->addWidget(m_connectionWidget);
+    m_ui->stackedWidget->addWidget(m_waitingWidget);
+    m_ui->stackedWidget->addWidget(m_registrationWidget);
 
     QWidget* chatWidget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(chatWidget);
-    layout->addWidget(m_sendMsgWidget);
     layout->addWidget(m_historyWidget);
+    layout->addWidget(m_sendMsgWidget);
     chatWidget->setLayout(layout);
-    ui->stackedWidget->addWidget(chatWidget);
+    m_ui->stackedWidget->addWidget(chatWidget);
 
     connect(m_connectionWidget, &ConnectionWidget::ConnectToServer, this, &MainWindow::OnConnectToServer);
     connect(m_client, &MyClient::Connected, this, &MainWindow::OnConnectedToServer);
@@ -54,28 +56,27 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_client, &MyClient::UpdateHistory, m_historyWidget, &ChatHistory::SetHistory);
     connect(m_timer, &QTimer::timeout, m_client, &MyClient::OnUpdateHistory);
 
-    ui->stackedWidget->setCurrentIndex(PageConnection);
+    m_ui->stackedWidget->setCurrentIndex(PageConnection);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }
 
 void MainWindow::OnConnectToServer(const QString& ip)
 {
-    ui->stackedWidget->setCurrentIndex(PageWaiting);
+    m_ui->stackedWidget->setCurrentIndex(PageWaiting);
     m_client->ConnectToServer(ip, 2323);
 }
 
 void MainWindow::OnConnectedToServer()
 {
-    ui->stackedWidget->setCurrentIndex(PageRegistration);
+    m_ui->stackedWidget->setCurrentIndex(PageRegistration);
 }
 
 void MainWindow::OnChangeServer()
 {
-    ui->stackedWidget->setCurrentIndex(PageConnection);
+    m_ui->stackedWidget->setCurrentIndex(PageConnection);
 }
 
 void MainWindow::OnTryToRegistration(const QString& name)
@@ -85,9 +86,9 @@ void MainWindow::OnTryToRegistration(const QString& name)
 
 void MainWindow::OnSuccessfulRegistration(int id, const QString& name)
 {
-    ui->lblId->setText(QString("name: %0; id: %1").arg(name, QString::number(id)));
-    ui->lblId->show();
-    ui->stackedWidget->setCurrentIndex(PageSend);
+    m_ui->lblId->setText(QString("name: %0; id: %1").arg(name, QString::number(id)));
+    m_ui->lblId->show();
+    m_ui->stackedWidget->setCurrentIndex(PageSend);
 }
 
 void MainWindow::OnRegistrationFailed()

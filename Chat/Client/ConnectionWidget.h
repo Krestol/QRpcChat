@@ -1,7 +1,4 @@
-#ifndef CONNECTIONWIDGET_H
-#define CONNECTIONWIDGET_H
-
-#include <QWidget>
+#pragma once
 
 namespace Ui {
     class ConnectionWidget;
@@ -22,7 +19,9 @@ private slots:
     void OnConnect();
 
 private:
-    Ui::ConnectionWidget *ui;
+     void keyPressEvent(QKeyEvent* event);
+
+private:
+    std::unique_ptr<Ui::ConnectionWidget> m_ui;
 };
 
-#endif // CONNECTIONWIDGET_H

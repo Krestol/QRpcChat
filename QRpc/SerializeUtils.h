@@ -1,5 +1,5 @@
 #pragma once
-#include <QByteArray>
+
 namespace qRpc
 {
     template<typename T>

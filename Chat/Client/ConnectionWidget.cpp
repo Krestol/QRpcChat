@@ -4,18 +4,25 @@
 
 ConnectionWidget::ConnectionWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ConnectionWidget)
+    m_ui(new Ui::ConnectionWidget)
 {
-    ui->setupUi(this);
-    connect(ui->pushButton, &QPushButton::clicked, this, &ConnectionWidget::OnConnect);
+    m_ui->setupUi(this);
+    connect(m_ui->pushButton, &QPushButton::clicked, this, &ConnectionWidget::OnConnect);
 }
 
 ConnectionWidget::~ConnectionWidget()
 {
-    delete ui;
 }
 
 void ConnectionWidget::OnConnect()
 {
-    emit ConnectToServer(ui->lineEdit->text());
+    emit ConnectToServer(m_ui->lineEdit->text());
+}
+
+void ConnectionWidget::keyPressEvent(QKeyEvent* event)
+{
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        OnConnect();
+    }
 }

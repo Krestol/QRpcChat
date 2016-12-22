@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QWidget>
-
 namespace Ui {
     class SendMsgWidget;
 }
@@ -21,6 +19,9 @@ private slots:
     void OnSendMsg();
 
 private:
-    Ui::SendMsgWidget *ui;
+    void keyPressEvent(QKeyEvent* event);
+
+private:
+    std::unique_ptr<Ui::SendMsgWidget> m_ui;
 };
 

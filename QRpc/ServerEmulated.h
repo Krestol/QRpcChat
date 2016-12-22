@@ -1,5 +1,4 @@
 #pragma once
-#include <QMap>
 
 class QTcpSocket;
 namespace qRpc
@@ -16,26 +15,26 @@ namespace qRpc
         { }
 
         QObject* object;
-        const QString slotSignature;
+        QString slotSignature;
     };
 
     class ClientBase;
     class ServerEmulated : public QObject
     {
+    friend class ClientBase;
     public:
         ServerEmulated(int port, const QString& host, ClientBase* client, QObject* parent);
         int qt_metacall(QMetaObject::Call call, int id, void** argv);
-        void AddConnection(const QString& signal, const QString& slot);
-        void AddConnection(const QString& signal, const QString& slot, QObject* receiver);
         bool IsSignalConnected(const QString& signal);
 
     private slots:
         void OnResponse();
 
     private:
+        void AddConnection(const QString& signal, const QString& slot);
+        void AddConnection(const QString& signal, const QString& slot, QObject* receiver);
         void CallRealServer(void** argv);
         void EmitUnivesalSignal(QDataStream& data);
-        void OnConnected();
 
     private:
         const int m_port;

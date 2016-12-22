@@ -18,7 +18,7 @@ public:
     void ConnectToServer(const QString& host, int port);
 
 signals:
-    void SendToServer(int id, const QTime& time, const QString& msg);
+    void NewMessage(int id, const QTime& time, const QString& msg);
     void Registrate(const QString&);
     void RegistrationSuccessful(int id, const QString& name);
     void RegistrationFailed();

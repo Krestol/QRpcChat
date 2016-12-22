@@ -5,17 +5,16 @@
 
 ServerWidget::ServerWidget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::ServerWidget)
+    , m_ui(new Ui::ServerWidget)
 {
-    ui->setupUi(this);
+    m_ui->setupUi(this);
 }
 
 ServerWidget::~ServerWidget()
 {
-    delete ui;
 }
 
 void ServerWidget::OnNewMsg(const QString& name, const QTime& time, const QString& msg)
 {
-    ui->label->setText(ui->label->text() + "\n" + QString("[%0] [%1] %2").arg(time.toString(), name, msg));
+    m_ui->listWidget->addItem(QString("[%0] [%1] %2").arg(time.toString(), name, msg));
 }

@@ -5,3 +5,6 @@
 #include <QIODevice>
 #include <QDataStream>
 #include <QTimer>
+#include <QtGui>
+#include <QMainWindow>
+#include <memory>

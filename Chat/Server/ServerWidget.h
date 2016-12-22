@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QWidget>
-
 namespace Ui {
     class ServerWidget;
 }
@@ -22,6 +20,6 @@ public slots:
     void OnNewMsg(const QString& name, const QTime& time, const QString& msg);
 
 private:
-    Ui::ServerWidget *ui;
+    std::unique_ptr<Ui::ServerWidget> m_ui;
 };
 

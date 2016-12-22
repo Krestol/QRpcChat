@@ -31,7 +31,8 @@
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>Tahoma</family>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -62,6 +63,7 @@
       <widget class="QLabel" name="alreadyExistLbl">
        <property name="font">
         <font>
+         <family>Tahoma</family>
          <pointsize>11</pointsize>
         </font>
        </property>
