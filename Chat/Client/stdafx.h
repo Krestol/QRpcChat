@@ -1,10 +1,5 @@
 #pragma once
-#include <Qtime>
-#include <QMap>
-#include <QByteArray>
-#include <QIODevice>
-#include <QDataStream>
-#include <QTimer>
+#include <QtCore>
 #include <QtGui>
 #include <QMainWindow>
 #include <memory>
